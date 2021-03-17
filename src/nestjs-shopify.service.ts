@@ -1,8 +1,8 @@
 // tslint:disable: variable-name
 import { Injectable, Inject, Logger } from '@nestjs/common';
-import Shopify = require('shopify-api-node');
 import { NESTJS_SHOPIFY_OPTIONS} from './constants';
 import { NestjsShopifyOptions } from './interfaces';
+import * as Shopify from 'shopify-api-node';
 
 /**
  * Sample interface for NestjsShopifyService
@@ -29,6 +29,7 @@ export class NestjsShopifyService implements INestjsShopifyService {
   ) {
     this.logger = new Logger('NestjsShopifyService');
     this.logger.log(`Options: ${JSON.stringify(this._NestjsShopifyOptions)}`);
+    console.log(`Options: ${JSON.stringify(this._NestjsShopifyOptions)}`);
   }
 
   getShopify() {

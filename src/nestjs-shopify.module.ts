@@ -9,10 +9,12 @@ import {
   NestjsShopifyOptionsFactory,
 } from './interfaces';
 import { createNestjsShopifyProviders } from './nestjs-shopify.providers';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Global()
 @Module({
-  providers: [NestjsShopifyService],
+  imports: [ConfigModule],
+  providers: [NestjsShopifyService, ConfigService],
   exports: [NestjsShopifyService],
 })
 export class NestjsShopifyModule {

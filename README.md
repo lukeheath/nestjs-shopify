@@ -8,7 +8,7 @@
 
 <h3 align="center">NestJS + Shopify = &#60;3</h3>
 
-This is a NestJS module wrapper around the official [shopify-api-node](https://www.npmjs.com/package/shopify-api-node) library.
+This is a NestJS module wrapper around the official [shopify-api-node](https://www.npmjs.com/package/shopify-api-node) library. To get started, you will need API credentials generated in your Shopify admin as a [private app](https://help.shopify.com/en/manual/apps/private-apps).
 
 ### Installation
 
@@ -26,7 +26,21 @@ In your Nest Module, import `NestjsShopifyModule`:
 import { NestjsShopifyModule } from 'nestjs-shopify';
 ```
 
-In your service, import the Shopify library as `ShopifyClient` for type references. It does not provide a named export, so default import is required. Also import the `NestjsShopifyService`, which will provide a modularized reference to the underlying Shopify class:
+And register the module in your `imports`: 
+
+```javascript
+NestjsShopifyModule.registerAsync({
+  imports: [ConfigModule],
+  useFactory: (config: ConfigService) => ({
+    shopName: config.get('SHOPIFY_STORE'),
+    apiKey: config.get('SHOPIFY_KEY'),
+    password: config.get('SHOPIFY_PW'),
+  }),
+  inject: [ConfigService],
+}),
+```
+
+In your Nest Provider, import the Shopify library as `ShopifyClient` for type references. It does not provide a named export, so default import is required. Also import the `NestjsShopifyService`, which will provide a Nest-compatible reference to the underlying Shopify class:
 
 ```javascript
 import * as ShopifyClient from 'shopify-api-node';

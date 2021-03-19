@@ -6,31 +6,54 @@
   </a>
 </div>
 
-<h3 align="center">NestjsShopify</h3>
+<h3 align="center">NestJS + Shopify = &#60;3</h3>
+
+This is a NestJS module wrapper around the official [shopify-api-node](https://www.npmjs.com/package/shopify-api-node) library.
 
 ### Installation
 
 To install this project:
 
 ```bash
-npm install
+npm install --save nestjs-shopify
 ```
 
-(or yarn equivalent)
+### Setup
 
-### Running
+In your Nest Module, import `NestjsShopifyModule`: 
 
-```bash
-npm run start:dev
+```javascript
+import { NestjsShopifyModule } from 'nestjs-shopify';
 ```
 
-Then connect to [http://localhost:3000](http://localhost:3000).
+In your service, import the Shopify library as `ShopifyClient` for type references. It does not provide a named export, so default import is required. Also import the `NestjsShopifyService`, which will provide a modularized reference to the underlying Shopify class:
 
-### Customizing
+```javascript
+import * as ShopifyClient from 'shopify-api-node';
+import { NestjsShopifyService } from 'nestjs-shopify';
+```
 
-The files in the project have comments that should help guide you.
+In your Nest Provider, instantiate the client and service: 
 
-You can also refer to [this article](https://dev.to/nestjs/advanced-nestjs-how-to-build-completely-dynamic-nestjs-modules-1370) for details on the concepts behind this module pattern.
+```javascript
+@Injectable()
+export class ShopifyService {
+  private shopifyClient: ShopifyClient;
+
+  constructor(
+    private shopifyService: NestjsShopifyService
+  ) {
+    this.shopifyClient = this.shopifyService.getShopify();
+  }
+```
+
+You can now reference all methods and events on the `shopfyClient` Shopify instance as defined in the [docs]((https://www.npmjs.com/package/shopify-api-node). Reference typings on the ShopifyClient module directly: 
+
+```javascript
+async getShopifyProducts(): Promise<ShopifyClient.IProduct[]> {
+  return await this.shopifyClient.product.list({ limit: 20 });
+}
+```
 
 ### Big Ups
 

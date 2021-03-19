@@ -29,7 +29,6 @@ export class NestjsShopifyService implements INestjsShopifyService {
   ) {
     this.logger = new Logger('NestjsShopifyService');
     this.logger.log(`Options: ${JSON.stringify(this._NestjsShopifyOptions)}`);
-    console.log(`Options: ${JSON.stringify(this._NestjsShopifyOptions)}`);
   }
 
   getShopify() {

@@ -1,9 +1,10 @@
 {
   "name": "nestjs-shopify",
-  "version": "1.0.0",
-  "description": "",
-  "author": "",
+  "version": "0.1.0",
+  "description": "NestJS wrapper for the official shopify-api-node library",
+  "author": "Luke Heath",
   "license": "MIT",
+  "homepage": "https://github.com/lukeheath/nestjs-shopify#readme",
   "main": "dist/index.js",
   "scripts": {
     "start:dev": "tsc-watch -p tsconfig.build.json --onSuccess \"node dist/main.js\"",

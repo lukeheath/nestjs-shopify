@@ -47,7 +47,7 @@ import * as ShopifyClient from 'shopify-api-node';
 import { NestjsShopifyService } from 'nestjs-shopify';
 ```
 
-In your Nest Provider, instantiate the client and service: 
+In your Nest Provider, instantiate the client: 
 
 ```javascript
 @Injectable()
@@ -57,6 +57,7 @@ export class ShopifyService {
   constructor(
     private shopifyService: NestjsShopifyService
   ) {
+    // Returns a new instance of the Shopify class
     this.shopifyClient = this.shopifyService.getShopify();
   }
 ```

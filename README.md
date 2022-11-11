@@ -15,7 +15,7 @@ This is a NestJS module wrapper around the official [shopify-api-node](https://w
 To install this project:
 
 ```bash
-npm install --save nestjs-shopify
+npm install --save nestjs-shopify-wrapper
 ```
 
 ### Setup
